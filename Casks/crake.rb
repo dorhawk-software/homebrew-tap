@@ -2,8 +2,8 @@
 # package's checksum) and pushed to dorhawk-software/homebrew-tap:
 #   brew install --cask dorhawk-software/tap/crake
 cask "crake" do
-  version "0.6.1"
-  sha256 "39bcb4bef137ca8c22c42c78c268c78990433db5d2f1fb111d7211db31863e7a"
+  version "0.7.0"
+  sha256 "ef7dc949f4122f44c534657fc22378de1b18d5683a8b4ec883c6783c9b58483b"
 
   url "https://github.com/dorhawk-software/crake/releases/download/v#{version}/Crake-#{version}.pkg"
   name "Crake"
@@ -17,7 +17,7 @@ cask "crake" do
 
   # craked stops first: switching every tunnel off takes its routes, DNS
   # settings and pf rules with it.
-  uninstall launchctl: "software.dorhawk.craked",
+  uninstall launchctl: ["software.dorhawk.crake.daemon", "software.dorhawk.craked"],
             pkgutil:   "software.dorhawk.crake",
             delete:    "/Applications/Crake.app"
 
