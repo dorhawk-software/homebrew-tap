@@ -2,15 +2,17 @@
 # package's checksum) and pushed to dorhawk-software/homebrew-tap:
 #   brew install --cask dorhawk-software/tap/crake
 cask "crake" do
-  version "0.14.0"
-  sha256 "3b93aeb3788198dbc37fa87a49519ba42ed1166379093aad5940c7d249335c4a"
+  version "0.15.0"
+  sha256 "062aa250fa3ae5e4180c0769c2f48c3e47e023dfc85a5f9ab6d9300681c5bf05"
 
   url "https://github.com/dorhawk-software/crake/releases/download/v#{version}/Crake-#{version}.pkg"
   name "Crake"
   desc "VPN client that sends only the hosts that need it through a tunnel"
   homepage "https://dorhawk.software/crake/"
 
-  depends_on macos: ">= :monterey"
+  # Monterey or newer (a string comparison is deprecated: Homebrew warned
+  # on every install, 2026-10-25).
+  depends_on macos: :monterey
   depends_on formula: "openconnect"
   # OpenVPN profiles (craked runs Homebrew's openvpn).
   depends_on formula: "openvpn"
