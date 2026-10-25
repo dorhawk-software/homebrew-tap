@@ -2,8 +2,8 @@
 # package's checksum) and pushed to dorhawk-software/homebrew-tap:
 #   brew install --cask dorhawk-software/tap/crake
 cask "crake" do
-  version "0.15.0"
-  sha256 "062aa250fa3ae5e4180c0769c2f48c3e47e023dfc85a5f9ab6d9300681c5bf05"
+  version "0.15.1"
+  sha256 "09b10f93c7700b316b73d162851d96187dea29a1aeda20a1a57be783cfd43f2c"
 
   url "https://github.com/dorhawk-software/crake/releases/download/v#{version}/Crake-#{version}.pkg"
   name "Crake"
