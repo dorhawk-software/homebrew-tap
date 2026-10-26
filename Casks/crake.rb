@@ -2,8 +2,8 @@
 # package's checksum) and pushed to dorhawk-software/homebrew-tap:
 #   brew install --cask dorhawk-software/tap/crake
 cask "crake" do
-  version "0.15.2"
-  sha256 "748c25b0cc42ac5d5d535a921a71230de38ec3c65f879499439313337f834a69"
+  version "0.15.3"
+  sha256 "2342ed6e0d22eb08567d5fdbe658529fcdf517ef26dbfc433a7decd9f0dacce7"
 
   url "https://github.com/dorhawk-software/crake/releases/download/v#{version}/Crake-#{version}.pkg"
   name "Crake"
@@ -20,7 +20,9 @@ cask "crake" do
   pkg "Crake-#{version}.pkg"
 
   # craked stops first: switching every tunnel off takes its routes, DNS
-  # settings and pf rules with it.
+  # settings and pf rules with it. Homebrew does this on upgrades too, and
+  # nothing loads craked again but the app (it registers it again,
+  # crates/crake/src/sys/macos/service.rs).
   uninstall launchctl: ["software.dorhawk.crake.daemon", "software.dorhawk.craked"],
             pkgutil:   "software.dorhawk.crake",
             delete:    "/Applications/Crake.app"
