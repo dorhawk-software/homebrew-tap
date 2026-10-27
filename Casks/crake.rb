@@ -2,8 +2,8 @@
 # package's checksum) and pushed to dorhawk-software/homebrew-tap:
 #   brew install --cask dorhawk-software/tap/crake
 cask "crake" do
-  version "0.15.4"
-  sha256 "90caa8a8109281ac01fa99e33c78d6d6caada7c7f3df2401e7d202f5855e8b11"
+  version "0.16.0"
+  sha256 "9ba5f8ff8f05b1858b60f44f751f1b3f6c38d83dc17a1d4ab42fac28e5fa0d7d"
 
   url "https://github.com/dorhawk-software/crake/releases/download/v#{version}/Crake-#{version}.pkg"
   name "Crake"
@@ -18,6 +18,19 @@ cask "crake" do
   depends_on formula: "openvpn"
 
   pkg "Crake-#{version}.pkg"
+
+  # The tunnels stay signed in across an upgrade: craked, stopping, finds
+  # the handover flag (as postinstall leaves it) and hangs up without
+  # logging off; the new craked brings them back (manager/handover.rs).
+  # Homebrew doesn't tell a cask whether it's upgrading, so the flag is
+  # left on every uninstall too: a real uninstall leaves the sessions to
+  # time out on the gateways (the user's choice, 2026-10-27).
+  uninstall_preflight_steps do
+    run "/bin/sh",
+        args:         ["-c", "mkdir -p /var/run/crake && touch /var/run/crake/handover"],
+        sudo:         true,
+        must_succeed: false
+  end
 
   # craked stops first: switching every tunnel off takes its routes, DNS
   # settings and pf rules with it. Homebrew does this on upgrades too, and
